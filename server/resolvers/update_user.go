@@ -63,6 +63,10 @@ func UpdateUserResolver(ctx context.Context, params model.UpdateUserInput) (*mod
 		user.GivenName = params.GivenName
 	}
 
+	if params.StoreID != nil && refs.StringValue(user.StoreID) != refs.StringValue(params.StoreID) {
+		user.StoreID = params.StoreID
+	}
+
 	if params.FamilyName != nil && refs.StringValue(user.FamilyName) != refs.StringValue(params.FamilyName) {
 		user.FamilyName = params.FamilyName
 	}
@@ -251,6 +255,7 @@ func UpdateUserResolver(ctx context.Context, params model.UpdateUserInput) (*mod
 		Email:      user.Email,
 		Picture:    user.Picture,
 		GivenName:  user.GivenName,
+		StoreID:    user.StoreID,
 		FamilyName: user.FamilyName,
 		Roles:      strings.Split(user.Roles, ","),
 		CreatedAt:  &createdAt,

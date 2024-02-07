@@ -104,6 +104,7 @@ export const UserDetailsQuery = `
         gender
         birthdate
         phone_number
+        store_id
         picture
         signup_methods
         roles

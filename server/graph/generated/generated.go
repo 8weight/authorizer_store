@@ -287,6 +287,7 @@ type ComplexityRoot struct {
 		RevokedTimestamp         func(childComplexity int) int
 		Roles                    func(childComplexity int) int
 		SignupMethods            func(childComplexity int) int
+		StoreID                  func(childComplexity int) int
 		UpdatedAt                func(childComplexity int) int
 	}
 
@@ -1984,6 +1985,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.User.SignupMethods(childComplexity), true
 
+	case "User.store_id":
+		if e.complexity.User.StoreID == nil {
+			break
+		}
+
+		return e.complexity.User.StoreID(childComplexity), true
+
 	case "User.updated_at":
 		if e.complexity.User.UpdatedAt == nil {
 			break
@@ -2435,6 +2443,7 @@ type User {
   birthdate: String
   phone_number: String
   phone_number_verified: Boolean
+  store_id: String
   picture: String
   roles: [String!]!
   created_at: Int64
@@ -2818,6 +2827,7 @@ input UpdateProfileInput {
   family_name: String
   middle_name: String
   nickname: String
+  store_id: String
   gender: String
   birthdate: String
   phone_number: String
@@ -2835,6 +2845,7 @@ input UpdateUserInput {
   middle_name: String
   nickname: String
   gender: String
+  store_id: String
   birthdate: String
   phone_number: String
   picture: String
@@ -4088,6 +4099,8 @@ func (ec *executionContext) fieldContext_AuthResponse_user(ctx context.Context, 
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -7889,6 +7902,8 @@ func (ec *executionContext) fieldContext_InviteMembersResponse_Users(ctx context
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -9867,6 +9882,8 @@ func (ec *executionContext) fieldContext_Mutation__update_user(ctx context.Conte
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -11187,6 +11204,8 @@ func (ec *executionContext) fieldContext_Query_profile(ctx context.Context, fiel
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -11456,6 +11475,8 @@ func (ec *executionContext) fieldContext_Query__user(ctx context.Context, field 
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -13093,6 +13114,47 @@ func (ec *executionContext) fieldContext_User_phone_number_verified(ctx context.
 	return fc, nil
 }
 
+func (ec *executionContext) _User_store_id(ctx context.Context, field graphql.CollectedField, obj *model.User) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_User_store_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.StoreID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_User_store_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "User",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _User_picture(ctx context.Context, field graphql.CollectedField, obj *model.User) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_User_picture(ctx, field)
 	if err != nil {
@@ -13502,6 +13564,8 @@ func (ec *executionContext) fieldContext_Users_users(ctx context.Context, field 
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -13717,6 +13781,8 @@ func (ec *executionContext) fieldContext_ValidateSessionResponse_user(ctx contex
 				return ec.fieldContext_User_phone_number(ctx, field)
 			case "phone_number_verified":
 				return ec.fieldContext_User_phone_number_verified(ctx, field)
+			case "store_id":
+				return ec.fieldContext_User_store_id(ctx, field)
 			case "picture":
 				return ec.fieldContext_User_picture(ctx, field)
 			case "roles":
@@ -18839,7 +18905,7 @@ func (ec *executionContext) unmarshalInputUpdateProfileInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"old_password", "new_password", "confirm_new_password", "email", "given_name", "family_name", "middle_name", "nickname", "gender", "birthdate", "phone_number", "picture", "is_multi_factor_auth_enabled", "app_data"}
+	fieldsInOrder := [...]string{"old_password", "new_password", "confirm_new_password", "email", "given_name", "family_name", "middle_name", "nickname", "store_id", "gender", "birthdate", "phone_number", "picture", "is_multi_factor_auth_enabled", "app_data"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -18918,6 +18984,15 @@ func (ec *executionContext) unmarshalInputUpdateProfileInput(ctx context.Context
 				return it, err
 			}
 			it.Nickname = data
+		case "store_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("store_id"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.StoreID = data
 		case "gender":
 			var err error
 
@@ -18985,7 +19060,7 @@ func (ec *executionContext) unmarshalInputUpdateUserInput(ctx context.Context, o
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"id", "email", "email_verified", "given_name", "family_name", "middle_name", "nickname", "gender", "birthdate", "phone_number", "picture", "roles", "is_multi_factor_auth_enabled", "app_data"}
+	fieldsInOrder := [...]string{"id", "email", "email_verified", "given_name", "family_name", "middle_name", "nickname", "gender", "store_id", "birthdate", "phone_number", "picture", "roles", "is_multi_factor_auth_enabled", "app_data"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -19064,6 +19139,15 @@ func (ec *executionContext) unmarshalInputUpdateUserInput(ctx context.Context, o
 				return it, err
 			}
 			it.Gender = data
+		case "store_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("store_id"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.StoreID = data
 		case "birthdate":
 			var err error
 
@@ -20969,6 +21053,8 @@ func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = ec._User_phone_number(ctx, field, obj)
 		case "phone_number_verified":
 			out.Values[i] = ec._User_phone_number_verified(ctx, field, obj)
+		case "store_id":
+			out.Values[i] = ec._User_store_id(ctx, field, obj)
 		case "picture":
 			out.Values[i] = ec._User_picture(ctx, field, obj)
 		case "roles":

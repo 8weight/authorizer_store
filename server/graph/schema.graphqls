@@ -50,6 +50,7 @@ type User {
   birthdate: String
   phone_number: String
   phone_number_verified: Boolean
+  store_id: String
   picture: String
   roles: [String!]!
   created_at: Int64
@@ -433,6 +434,7 @@ input UpdateProfileInput {
   family_name: String
   middle_name: String
   nickname: String
+  store_id: String
   gender: String
   birthdate: String
   phone_number: String
@@ -450,6 +452,7 @@ input UpdateUserInput {
   middle_name: String
   nickname: String
   gender: String
+  store_id: String
   birthdate: String
   phone_number: String
   picture: String

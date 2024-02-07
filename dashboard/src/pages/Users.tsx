@@ -62,6 +62,7 @@ interface userDataTypes {
 	middle_name: string;
 	nickname: string;
 	gender: string;
+	store_id: string;
 	birthdate: string;
 	phone_number: string;
 	picture: string;

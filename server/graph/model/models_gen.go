@@ -421,6 +421,7 @@ type UpdateProfileInput struct {
 	FamilyName               *string                `json:"family_name,omitempty"`
 	MiddleName               *string                `json:"middle_name,omitempty"`
 	Nickname                 *string                `json:"nickname,omitempty"`
+	StoreID                  *string                `json:"store_id,omitempty"`
 	Gender                   *string                `json:"gender,omitempty"`
 	Birthdate                *string                `json:"birthdate,omitempty"`
 	PhoneNumber              *string                `json:"phone_number,omitempty"`
@@ -438,6 +439,7 @@ type UpdateUserInput struct {
 	MiddleName               *string                `json:"middle_name,omitempty"`
 	Nickname                 *string                `json:"nickname,omitempty"`
 	Gender                   *string                `json:"gender,omitempty"`
+	StoreID                  *string                `json:"store_id,omitempty"`
 	Birthdate                *string                `json:"birthdate,omitempty"`
 	PhoneNumber              *string                `json:"phone_number,omitempty"`
 	Picture                  *string                `json:"picture,omitempty"`
@@ -469,6 +471,7 @@ type User struct {
 	Birthdate                *string                `json:"birthdate,omitempty"`
 	PhoneNumber              *string                `json:"phone_number,omitempty"`
 	PhoneNumberVerified      *bool                  `json:"phone_number_verified,omitempty"`
+	StoreID                  *string                `json:"store_id,omitempty"`
 	Picture                  *string                `json:"picture,omitempty"`
 	Roles                    []string               `json:"roles"`
 	CreatedAt                *int64                 `json:"created_at,omitempty"`
